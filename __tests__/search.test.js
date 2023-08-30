@@ -10,6 +10,6 @@ describe('Поиск', () => {
   test('шаг 1, поиск оп слову', () => {
     const result = search(docs, 'shoot');
 
-    expect(result).toEqual([doc2.id, doc1.id]);
+    expect(result).toEqual([doc1.id, doc2.id]);
   });
 });

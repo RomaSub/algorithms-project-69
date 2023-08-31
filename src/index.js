@@ -1,12 +1,8 @@
 const search = (arrayDocs, searchString) => {
-  console.log(arrayDocs);
-  const result = arrayDocs.reduce((acc, { id, text }) => {
-    const trueText = text.split(' ');
-    if (trueText.includes(searchString)) {
-      acc.push(id);
-    }
-    return acc;
-  }, []);
+  const term = searchString.match(/\w+/g)[0];
+  const result = arrayDocs
+    .filter(({ text }) => text.match(/\w+/g).includes(term))
+    .map(({ id }) => id);
   return result;
 };
 export default search;

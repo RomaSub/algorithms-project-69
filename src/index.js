@@ -1,22 +1,16 @@
-const search = (arraydocs, searchstring) => {
-  const term = searchstring.match(/\w+/g);
-  const result = [];
+const search = (arraydocs) => {
+  const index = arraydocs.reduce((acc, { id, text }) => {
+    const keys = text.match(/\w+/g);
+    keys.forEach((word) => {
+      if (acc[word]) {
+        acc[word].push(id);
+      } else {
+        acc[word] = [id];
+      }
+    });
+    return acc;
+  }, {});
 
-  arraydocs.forEach(({ id, text }) => {
-    const matches = text.match(/\w+/g).filter((word) => term.includes(word));
-    const numberOfSearchWords = new Set(matches).size;
-    if (matches.length) {
-      result.push({ id, relevance: matches.length, numberOfSearchWords });
-    }
-  });
-
-  result.sort((a, b) => {
-    if (b.numberOfSearchWords !== a.numberOfSearchWords) {
-      return b.numberOfSearchWords - a.numberOfSearchWords;
-    }
-    return b.relevance - a.relevance;
-  });
-
-  return result.map(({ id }) => id);
+  return index;
 };
 export default search;

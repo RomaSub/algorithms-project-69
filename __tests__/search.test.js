@@ -25,4 +25,10 @@ describe('Поиск', () => { //eslint-disable-line
 
     expect(result).toEqual([doc2.id, doc1.id]); //eslint-disable-line
   });
+
+  test('шаг 4, Нечеткий поиск', () => { //eslint-disable-line
+    const result = search(docs, 'shoot at me');
+
+    expect(result).toEqual([doc2.id, doc1.id]); //eslint-disable-line
+  });
 });
